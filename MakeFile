@@ -1,0 +1,37 @@
+# ===== Configuração =====
+CC = C:/raylib/w64devkit/bin/gcc.exe
+TARGET   = main.exe
+
+# Ajuste para onde a Raylib está instalada
+RAYLIB   = C:/raylib/raylib/src
+
+# Todos os .c: o main.c e qualquer .c dentro de modulos/*/
+SRC      = main.c $(wildcard modulos/*/*.c)
+OBJ      = $(SRC:.c=.o)
+DEP      = $(OBJ:.o=.d)
+
+# Cada pasta de módulo vira um -I, então basta #include "mapa.h"
+INCLUDES = -I$(RAYLIB) $(addprefix -I,$(wildcard modulos/*))
+
+CFLAGS   = -Wall -Wextra -std=c99 -g $(INCLUDES) -MMD -MP
+LDFLAGS  = -L$(RAYLIB)
+LDLIBS   = -lraylib -lopengl32 -lgdi32 -lwinmm
+
+# ===== Regras =====
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	$(RM) $(OBJ) $(DEP) $(TARGET)
+
+.PHONY: all run clean
+
+-include $(DEP)

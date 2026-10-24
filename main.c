@@ -1,15 +1,15 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#define TAM 32 // tamanho personagem
-#define VEL 200
+// modulos
+#include "modulos/mapa/mapa.h"
+#include "modulos/constantes/constantes.h"
 
-#define LINHAS 30
-#define COLUNAS 30
-#define TAMBLOCO 32 // render 32 bits
+#define TAM 32 // tamanho personagem
+#define VEL 300
 
 // HEADER
-void draw_map(int lin, int col, char map[lin][col]);
+void desenhar_mapa(int lin, int col, char map[lin][col]);
 Vector2 player_spawn_pos(int lin, int col, char map[lin][col]);
 
 // Structures
@@ -20,7 +20,7 @@ struct character { // estrutura do personagem
 int main(void)
 {
     // DECLARACAO VARIAVEIS
-    char mapa[LINHAS][COLUNAS + 1] = {
+    /*char mapa[LINHAS][COLUNAS + 1] = {
     "                              ", 
     "           ZZZFZZZ            ", 
     "              H               ", 
@@ -50,20 +50,24 @@ int main(void)
     "    H                      H  ", 
     " P  H                      H  ", 
     "ZZZZSZZZZZZZZZEZZZZZZZZZZZZHZZ", 
-    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"  };
+    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"  };*/
+    char mapa[MAPA_LINHAS][MAPA_COLUNAS + 1] = {0};
+    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS + 1, mapa);
     
-    // SetConfigFlags(FLAG_FULLSCREEN_MODE);
-    InitWindow(TAMBLOCO * LINHAS, TAMBLOCO * COLUNAS, "Donkey Kong");
+    // inicializar tela
+    InitWindow(TAMANHO_BLOCO * MAPA_LINHAS, TAMANHO_BLOCO * MAPA_COLUNAS, "Donkey Kong");
+    SetTargetFPS(FPS_ALVO);
+
     struct character player;
-    player.pos = player_spawn_pos(LINHAS, COLUNAS, mapa);
-    printf("[%d, %d]", player.pos.x, player.pos.y);
+    player.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, mapa);
+    printf("[%d, %d]", (int)player.pos.x, (int)player.pos.y);
 
     while (!WindowShouldClose())
     {
 
         // movimento do personagem
         float delta = GetFrameTime(); 
-        float move = (VEL * delta);
+        float move = (VELOCIDADE_JOGADOR * delta);
 
         if (IsKeyDown(KEY_A)) player.pos.x -= move;
         else if (IsKeyDown(KEY_D)) player.pos.x += move;
@@ -71,7 +75,7 @@ int main(void)
         // DRAWING
         BeginDrawing();
         ClearBackground(DARKGREEN);
-        draw_map(LINHAS, COLUNAS + 1, mapa);
+        desenhar_mapa(MAPA_LINHAS, MAPA_COLUNAS + 1, mapa);
         DrawRectangle(player.pos.x, player.pos.y, TAM, TAM, RED);
         EndDrawing();
     }
@@ -81,7 +85,7 @@ int main(void)
 }
 
 // FUNCOES
-void draw_map(int lin, int col, char map[lin][col]) { // desenhar o mapa
+void desenhar_mapa(int lin, int col, char map[lin][col]) { // desenhar o mapa
     int w = GetScreenWidth();
     int h = GetScreenHeight();
 

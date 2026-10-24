@@ -8,6 +8,15 @@
 #define COLUNAS 30
 #define TAMBLOCO 32 // render 32 bits
 
+// HEADER
+void draw_map(int lin, int col, char map[lin][col]);
+Vector2 player_spawn_pos(int lin, int col, char map[lin][col]);
+
+// Structures
+struct character { // estrutura do personagem
+    Vector2 pos;
+};
+
 int main(void)
 {
     // DECLARACAO VARIAVEIS
@@ -39,16 +48,16 @@ int main(void)
     "ZZZZSZZZZZZZZZZZZZZZZZZZZZZHZZ", 
     "    H                      D  ", 
     "    H                      H  ", 
-    "    H                      H  ", 
-    "PZZZSZZZZZZZZZEZZZZZZZZZZZZHZZ", 
+    " P  H                      H  ", 
+    "ZZZZSZZZZZZZZZEZZZZZZZZZZZZHZZ", 
     "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"  };
     
     // SetConfigFlags(FLAG_FULLSCREEN_MODE);
     InitWindow(TAMBLOCO * LINHAS, TAMBLOCO * COLUNAS, "Donkey Kong");
-    float pos[2] = {GetScreenWidth()/2, GetScreenHeight()/2};
+    struct character player;
+    player.pos = player_spawn_pos(LINHAS, COLUNAS, mapa);
+    printf("[%d, %d]", player.pos.x, player.pos.y);
 
-    
-    
     while (!WindowShouldClose())
     {
 
@@ -56,18 +65,52 @@ int main(void)
         float delta = GetFrameTime(); 
         float move = (VEL * delta);
 
-        if (IsKeyDown(KEY_A)) pos[0] -= move;
-        else if (IsKeyDown(KEY_D)) pos[0] += move;
-        if (IsKeyDown(KEY_W)) pos[1] -= move;
-        else if (IsKeyDown(KEY_S)) pos[1] += move;
+        if (IsKeyDown(KEY_A)) player.pos.x -= move;
+        else if (IsKeyDown(KEY_D)) player.pos.x += move;
 
         // DRAWING
         BeginDrawing();
         ClearBackground(DARKGREEN);
-        DrawRectangle(pos[0], pos[1], TAM, TAM, RED);
+        draw_map(LINHAS, COLUNAS + 1, mapa);
+        DrawRectangle(player.pos.x, player.pos.y, TAM, TAM, RED);
         EndDrawing();
     }
     
     CloseWindow();
     return 0;
+}
+
+// FUNCOES
+void draw_map(int lin, int col, char map[lin][col]) { // desenhar o mapa
+    int w = GetScreenWidth();
+    int h = GetScreenHeight();
+
+    for(int l = 0; l < lin; l++) {
+        for(int c = 0; c < col; c++) {
+            int x0 = c * w / col;
+            int y0 = l * h / lin;
+
+            int x1 = (c + 1) * w / col;
+            int y1 = (l + 1) * h / lin;
+
+            if (map[l][c] == 'Z')
+                DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), PINK);
+            else if (map[l][c] == 'H' || map[l][c] == 'D' || map[l][c] == 'S')
+                DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), SKYBLUE);
+        }
+    }
+}
+
+Vector2 player_spawn_pos(int lin, int col, char map[lin][col]) { // encontrar a posicao inicial do personagem
+    Vector2 pos = {0, 0};
+    for(int l = 0; l < lin; l++) {
+
+        for(int c = 0; c < col; c++) {
+            if (map[l][c] == 'P') {
+                pos.x = (GetScreenWidth()/col) * c;
+                pos.y = (GetScreenHeight()/lin) * l;
+            }
+        }
+    }
+    return pos;
 }

@@ -32,7 +32,10 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
             printf("ERRO: linha com o tamanho errado\n");
             return 0;
         }
-        strcpy(destino[l], linha); // copia a linha para a matriz de destino
+        
+        // copia a linha para a matriz de destino
+        memset(destino[l], ' ', col); // limpa a memoria
+        memcpy(destino[l], linha, col); // copia para a matriz(sem o \0)
     }
 
     fclose(pArq); // fechar o arquivo

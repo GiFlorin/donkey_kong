@@ -6,9 +6,6 @@
 #include "modulos/constantes/constantes.h"
 #include "modulos/render/render.h"
 
-#define TAM 32 // tamanho personagem
-#define VEL 300
-
 // HEADER
 Vector2 player_spawn_pos(int lin, int col, char map[lin][col]);
 
@@ -20,8 +17,8 @@ struct character { // estrutura do personagem
 int main(void)
 {
     // DECLARACAO VARIAVEIS
-    char mapa[MAPA_LINHAS][MAPA_COLUNAS + 1] = {0};
-    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS + 1, mapa);
+    char mapa[MAPA_LINHAS][MAPA_COLUNAS] = {0};
+    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, mapa);
     
     // inicializar tela
     InitWindow(TAMANHO_BLOCO * MAPA_LINHAS, TAMANHO_BLOCO * MAPA_COLUNAS, "Donkey Kong");
@@ -44,8 +41,8 @@ int main(void)
         // DRAWING
         BeginDrawing();
         ClearBackground(DARKGREEN);
-        desenhar_mapa(MAPA_LINHAS, MAPA_COLUNAS + 1, mapa);
-        DrawRectangle(player.pos.x, player.pos.y, TAM, TAM, RED);
+        desenhar_mapa(MAPA_LINHAS, MAPA_COLUNAS, mapa);
+        DrawRectangle(player.pos.x, player.pos.y, TAMANHO_PERSONAGEM, TAMANHO_PERSONAGEM, RED);
         EndDrawing();
     }
     

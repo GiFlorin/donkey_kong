@@ -12,7 +12,6 @@ int main(void)
     // DECLARACAO VARIAVEIS
     Jogo jogo = {0};
     ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
-    Jogador player;
     
     
     // inicializar tela
@@ -20,8 +19,7 @@ int main(void)
     SetTargetFPS(FPS_ALVO);
 
     
-    player.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
-    printf("[%d, %d]", (int)player.pos.x, (int)player.pos.y);
+    jogo.jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
 
     while (!WindowShouldClose())
     {
@@ -29,8 +27,8 @@ int main(void)
         float delta = GetFrameTime(); 
         float move = (VELOCIDADE_JOGADOR * delta);
 
-        if (IsKeyDown(KEY_A)) player.pos.x -= move;
-        else if (IsKeyDown(KEY_D)) player.pos.x += move;
+        if (IsKeyDown(KEY_A)) jogo.jogador.pos.x -= move;
+        else if (IsKeyDown(KEY_D)) jogo.jogador.pos.x += move;
 
         // DRAWING
         BeginDrawing();

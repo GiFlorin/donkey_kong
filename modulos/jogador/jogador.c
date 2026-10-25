@@ -1,6 +1,9 @@
 #include "jogador.h"
 #include "tipos/tipos.h"
+#include "constantes/constantes.h"
 #include <raylib.h>
+#include <stdio.h>
+#include <math.h>
 
 void mover_jogador(int dir, Jogador * jogador) {
     float delta = GetFrameTime(); 
@@ -8,4 +11,25 @@ void mover_jogador(int dir, Jogador * jogador) {
 
     (jogador->pos).x += dist * dir;
 
+}
+
+int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { // 1 se estiver no chao e 0 se nao
+    float delta_col = (float)GetScreenWidth() / MAPA_COLUNAS;
+    float delta_lin = (float)GetScreenHeight() / MAPA_LINHAS;
+
+    int col_esq = floor(pos_jogador.x/delta_col); // em qual coluna o extremo esquerdo do personagem está
+    int col_dir = ceil((pos_jogador.x + 1)/delta_col); // em qual coluna o extremo direito do personagem está
+
+    int linha_pes = (int)(pos_jogador.y + TAMANHO_PERSONAGEM)/delta_lin; // em qual linha os pes do personagem estao
+
+    // se estiver na borda do mapa
+    if (linha_pes < 0 || linha_pes >= MAPA_LINHAS) return 0; 
+    if (col_esq < 0) col_esq = 0;
+    if (col_dir >= MAPA_COLUNAS) col_dir = MAPA_COLUNAS - 1;
+
+    if (mapa[linha_pes][col_esq] == 'Z' || mapa[linha_pes][col_dir] == 'Z') { // so o bloco de baixo for chao
+        return 1;
+    }
+
+    return 0;
 }

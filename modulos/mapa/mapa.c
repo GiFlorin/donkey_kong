@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <raylib.h>
+#include "constantes/constantes.h"
 
 int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com sucesso e 0 com erro
     /*fopen → confere se dá para abrir

@@ -14,7 +14,6 @@ int main(void)
     Jogo jogo = {0};
     ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
     
-    
     // inicializar tela
     InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");
     SetTargetFPS(FPS_ALVO);

@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 #include <raylib.h>
+#include "constantes/constantes.h"
 
 int ler_arquivo(int lin, int col, char destino[lin][col]);
 

@@ -21,10 +21,10 @@
     ZZZZEZZZZZZZZZSZZZZZZZZH  
     D                      H  
     H                      H  
-    H                      H  
+    H         P            H  
 ZZZZSZZZZZZZZZZZZZZZZZZZZZZHZZ
     H                      D  
     H                      H  
- P  H                      H  
+    H                      H  
 ZZZZSZZZZZZZZZEZZZZZZZZZZZZHZZ
 ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ

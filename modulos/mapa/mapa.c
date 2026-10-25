@@ -1,6 +1,7 @@
 #include "mapa.h"
 #include <stdio.h>
 #include <string.h>
+#include <raylib.h>
 
 int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com sucesso e 0 com erro
     /*fopen → confere se dá para abrir
@@ -40,4 +41,18 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
 
     fclose(pArq); // fechar o arquivo
     return 1;
+}
+
+Vector2 player_spawn_pos(int lin, int col, char map[lin][col]) { // encontrar a posicao inicial do personagem
+    Vector2 pos = {0, 0};
+    for(int l = 0; l < lin; l++) {
+
+        for(int c = 0; c < col; c++) {
+            if (map[l][c] == 'P') {
+                pos.x = (GetScreenWidth()/col) * c;
+                pos.y = (GetScreenHeight()/lin) * l;
+            }
+        }
+    }
+    return pos;
 }

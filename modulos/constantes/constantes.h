@@ -8,9 +8,9 @@
 #define LARGURA_JANELA   (MAPA_COLUNAS * TAMANHO_BLOCO)
 #define ALTURA_JANELA    (MAPA_LINHAS * TAMANHO_BLOCO)
 #define FPS_ALVO         60
-#define VELOCIDADE_JOGADOR 300
-#define PULO_JOGADOR     30
-#define GRAVIDADE        10
+#define VELOCIDADE_JOGADOR 150
+#define PULO_JOGADOR     130
+#define GRAVIDADE        150
 #define VELOCIDADE_INIMIGO 100
 #define MAX_PLACAR       10
 #define TAM_NOME         20

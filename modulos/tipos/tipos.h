@@ -20,6 +20,7 @@ typedef enum { ESQUERDA = -1, DIREITA = 1 } Direcao;
 // STRUCTS
 typedef struct { // struct jogador
     Vector2 pos;          // posiçao no raylib é ancorada no ponto superior esquerdo
+    float   vel_y;        // velocidade vertical do jogador
     int     ativo;        // 1 = vivo, 0 = morto
 } Jogador;
 

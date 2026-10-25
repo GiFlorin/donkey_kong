@@ -8,4 +8,8 @@ void mover_jogador(int dir, Jogador * jogador);
 
 int jogador_esta_no_chao(Vector2 pos_player, char mapa[MAPA_LINHAS][MAPA_COLUNAS]); // verifica se o jogador está no chao
 
+void jogador_pula(Jogo * jogo);
+
+void jogador_atualizar_pos_y(Jogo * jogo);
+
 #endif

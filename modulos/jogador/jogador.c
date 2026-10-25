@@ -10,7 +10,7 @@ void mover_jogador(int dir, Jogador * jogador) {
     float dist = (VELOCIDADE_JOGADOR * delta);
 
     (jogador->pos).x += dist * dir;
-
+    
 }
 
 int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { // 1 se estiver no chao e 0 se nao
@@ -32,4 +32,27 @@ int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNA
     }
 
     return 0;
+}
+
+void jogador_pula(Jogo * jogo) {
+    if (jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
+        (jogo->jogador).vel_y = -PULO_JOGADOR;
+    }
+}
+
+void jogador_atualizar_pos_y(Jogo * jogo) {
+    float delta = GetFrameTime();
+
+    // aplica gravidade e move
+    (jogo->jogador).vel_y += GRAVIDADE * delta;
+    (jogo->jogador).pos.y += (jogo->jogador).vel_y * delta;
+
+    // se está descendo e tocou no chao
+    if (((jogo->jogador).vel_y > 0) && jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
+        float tile_h = (float)GetScreenHeight() / MAPA_LINHAS;
+        int lin_pes = (int)(((jogo->jogador).pos.y + TAMANHO_PERSONAGEM) / tile_h);
+        (jogo->jogador).pos.y = lin_pes * tile_h - TAMANHO_PERSONAGEM;   // encosta no chão
+        (jogo->jogador).vel_y = 0;
+    }
+
 }

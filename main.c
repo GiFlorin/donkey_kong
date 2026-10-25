@@ -25,15 +25,13 @@ int main(void)
     {
         // movimento do personagem
         float delta = GetFrameTime(); 
-        float move = (VELOCIDADE_JOGADOR * delta);
+        float dist = (VELOCIDADE_JOGADOR * delta);
 
-        if (IsKeyDown(KEY_A)) jogo.jogador.pos.x -= move;
-        else if (IsKeyDown(KEY_D)) jogo.jogador.pos.x += move;
+        if (IsKeyDown(KEY_A)) jogo.jogador.pos.x -= dist;
+        else if (IsKeyDown(KEY_D)) jogo.jogador.pos.x += dist;
 
         // DRAWING
-        BeginDrawing();
         desenhar_jogo(jogo);
-        EndDrawing();
     }
     
     CloseWindow();

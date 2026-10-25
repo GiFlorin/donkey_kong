@@ -30,7 +30,9 @@ void desenhar_jogador(Vector2 pos, int altura, int largura) {
 }
 
 void desenhar_jogo(Jogo jogo) {
+    BeginDrawing();
     ClearBackground(DARKGREEN);
     desenhar_mapa(jogo.mapa);
     desenhar_jogador(jogo.jogador.pos, TAMANHO_PERSONAGEM, TAMANHO_PERSONAGEM);
+    EndDrawing();
 }

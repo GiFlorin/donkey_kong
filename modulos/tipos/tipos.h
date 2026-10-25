@@ -2,6 +2,7 @@
 #define TIPOS_H
 
 #include "constantes/constantes.h"
+#include <raylib.h>
 
 // ENUMS
 typedef enum {

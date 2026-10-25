@@ -1,11 +1,12 @@
 #include <raylib.h>
 #include <stdio.h>
 
-// modulos
+// modulos locais
 #include "mapa/mapa.h"
 #include "constantes/constantes.h"
 #include "render/render.h"
 #include "tipos/tipos.h"
+#include "jogo/jogo.h"
 
 int main(void)
 {
@@ -15,20 +16,14 @@ int main(void)
     
     
     // inicializar tela
-    InitWindow(TAMANHO_BLOCO * MAPA_LINHAS, TAMANHO_BLOCO * MAPA_COLUNAS, "Donkey Kong");
+    InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");
     SetTargetFPS(FPS_ALVO);
-
-    
     jogo.jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
 
     while (!WindowShouldClose())
     {
-        // movimento do personagem
-        float delta = GetFrameTime(); 
-        float dist = (VELOCIDADE_JOGADOR * delta);
-
-        if (IsKeyDown(KEY_A)) jogo.jogador.pos.x -= dist;
-        else if (IsKeyDown(KEY_D)) jogo.jogador.pos.x += dist;
+        // atualizar o jogo
+        atualizar_jogo(&jogo);
 
         // DRAWING
         desenhar_jogo(jogo);

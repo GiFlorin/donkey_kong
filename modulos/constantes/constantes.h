@@ -12,5 +12,6 @@
 #define VELOCIDADE_INIMIGO 100
 #define MAX_PLACAR       10
 #define TAM_NOME         20
+#define TAM_FONTE        30
 
 #endif

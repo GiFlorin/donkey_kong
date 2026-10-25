@@ -29,10 +29,21 @@ void desenhar_jogador(Vector2 pos, int altura, int largura) {
     DrawRectangle(pos.x, pos.y, altura, largura, RED);
 }
 
+void desenhar_hud(int fase_num, float tempo) {
+    char str_fase[100], str_tempo[100];
+
+    sprintf(str_fase, "%d", fase_num);
+    sprintf(str_tempo, "%.1f", tempo);
+
+    DrawText(str_fase, TAM_FONTE, 10, TAM_FONTE, WHITE);       // Draw text (using default font)
+    DrawText(str_tempo, LARGURA_JANELA - (TAM_FONTE * 3), 10, TAM_FONTE, WHITE); 
+}
+
 void desenhar_jogo(Jogo jogo) {
     BeginDrawing();
     ClearBackground(DARKGREEN);
     desenhar_mapa(jogo.mapa);
     desenhar_jogador(jogo.jogador.pos, TAMANHO_PERSONAGEM, TAMANHO_PERSONAGEM);
+    desenhar_hud(jogo.fase_num, jogo.tempo);
     EndDrawing();
 }

@@ -8,6 +8,8 @@
 #include "tipos/tipos.h"
 #include "jogo/jogo.h"
 
+
+
 int main(void)
 {
     // DECLARACAO VARIAVEIS

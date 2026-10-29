@@ -12,4 +12,6 @@ void jogador_pula(Jogo * jogo);
 
 void jogador_atualizar_pos_y(Jogo * jogo);
 
+int jogador_esta_na_escada(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]); // checa se o jogador esta na escada
+
 #endif

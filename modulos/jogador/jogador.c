@@ -18,7 +18,7 @@ int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNA
     float delta_lin = (float)GetScreenHeight() / MAPA_LINHAS;
 
     int col_esq = floor(pos_jogador.x/delta_col); // em qual coluna o extremo esquerdo do personagem está
-    int col_dir = ceil((pos_jogador.x + 1)/delta_col); // em qual coluna o extremo direito do personagem está
+    int col_dir = ceil(pos_jogador.x/delta_col); // em qual coluna o extremo direito do personagem está
 
     int linha_pes = (int)(pos_jogador.y + TAMANHO_PERSONAGEM)/delta_lin; // em qual linha os pes do personagem estao
 
@@ -54,5 +54,27 @@ void jogador_atualizar_pos_y(Jogo * jogo) {
         (jogo->jogador).pos.y = lin_pes * tile_h - TAMANHO_PERSONAGEM;   // encosta no chão
         (jogo->jogador).vel_y = 0;
     }
+}
 
+int jogador_esta_na_escada(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { // 0 se nao e 1 se tem escada atras do jogador
+    float delta_col = (float)GetScreenWidth() / MAPA_COLUNAS;
+    float delta_lin = (float)GetScreenHeight() / MAPA_LINHAS;
+
+    int linhas[2], colunas[2]; // as 2 linhas e colunas que o personagem ocupa
+
+    colunas[0] = floor(pos.x/delta_col); // em qual coluna o extremo esquerdo do personagem está
+    colunas[1] = ceil((pos.x)/delta_col); // em qual coluna o extremo direito do personagem está
+
+    linhas[0] = floor((pos.y)/delta_lin); // em qual linha os pes do personagem estao
+    linhas[1] = ceil((pos.y + TAMANHO_PERSONAGEM - 1)/delta_lin);
+
+    for(int i = 0; i < 2; i++) { // itera pelas 2 linhas
+        for(int j = 0; j < 2; j++) { // itera pelas 2 colunas
+            if ((mapa[linhas[i]][colunas[j]] == SUBIDA_ESCADA) ||
+                (mapa[linhas[i]][colunas[j]] == DESCIDA_ESCADA) ||
+                (mapa[linhas[i]][colunas[j]] == ESCADA))
+                return 1;
+        }
+    }
+    return 0;
 }

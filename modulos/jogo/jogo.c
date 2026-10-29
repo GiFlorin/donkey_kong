@@ -14,9 +14,11 @@ void atualizar_jogo(Jogo * jogo) {
 
     else if (IsKeyDown(KEY_D)) 
         mover_jogador(1, &jogo->jogador);
+
     // Input pular
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) {
         jogador_pula(jogo);
+        printf("\nJogador esta na escada: %d \n", jogador_esta_na_escada(jogo->jogador.pos, jogo->mapa));
     }
 
 }

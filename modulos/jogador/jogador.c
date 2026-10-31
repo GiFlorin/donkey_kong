@@ -35,6 +35,7 @@ int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNA
 }
 
 void jogador_pula(Jogo * jogo) {
+    // se o jogador estiver no chao ou na saida da escada
     if (jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
         (jogo->jogador).vel_y = -PULO_JOGADOR;
     }
@@ -44,19 +45,26 @@ void jogador_atualizar_pos_y(Jogo * jogo) {
     float delta = GetFrameTime();
 
     // aplica gravidade e move
-    (jogo->jogador).vel_y += GRAVIDADE * delta;
+    if (!jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa))
+        (jogo->jogador).vel_y += GRAVIDADE * delta;
+
     (jogo->jogador).pos.y += (jogo->jogador).vel_y * delta;
+    
+    // se o jogador estiver na escada
+    if ((jogador_esta_na_escada(jogo->jogador.pos, jogo->mapa) == 1) || (jogador_esta_na_escada(jogo->jogador.pos, jogo->mapa) == 3) )
+        (jogo->jogador).vel_y = 0;
 
     // se está descendo e tocou no chao
     if (((jogo->jogador).vel_y > 0) && jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
         float tile_h = (float)GetScreenHeight() / MAPA_LINHAS;
         int lin_pes = (int)(((jogo->jogador).pos.y + TAMANHO_PERSONAGEM) / tile_h);
-        (jogo->jogador).pos.y = lin_pes * tile_h - TAMANHO_PERSONAGEM;   // encosta no chão
+        //(jogo->jogador).pos.y = lin_pes * tile_h - TAMANHO_PERSONAGEM;   // encosta no chão e mantem ele no chao
         (jogo->jogador).vel_y = 0;
     }
 }
 
-int jogador_esta_na_escada(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { // 0 se nao e 1 se tem escada atras do jogador
+int jogador_esta_na_escada(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { 
+    /*0 se nao, 1 se tem escada atras do jogador e 2 se ele esta na saida da escada e 3 se ele esta da subida da escada*/
     float delta_col = (float)GetScreenWidth() / MAPA_COLUNAS;
     float delta_lin = (float)GetScreenHeight() / MAPA_LINHAS;
 
@@ -66,15 +74,41 @@ int jogador_esta_na_escada(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { 
     colunas[1] = ceil((pos.x)/delta_col); // em qual coluna o extremo direito do personagem está
 
     linhas[0] = floor((pos.y)/delta_lin); // em qual linha os pes do personagem estao
-    linhas[1] = ceil((pos.y + TAMANHO_PERSONAGEM - 1)/delta_lin);
+    linhas[1] = ceil((pos.y)/delta_lin);
 
     for(int i = 0; i < 2; i++) { // itera pelas 2 linhas
         for(int j = 0; j < 2; j++) { // itera pelas 2 colunas
-            if ((mapa[linhas[i]][colunas[j]] == SUBIDA_ESCADA) ||
-                (mapa[linhas[i]][colunas[j]] == DESCIDA_ESCADA) ||
-                (mapa[linhas[i]][colunas[j]] == ESCADA))
+            if (mapa[linhas[i]][colunas[j]] == ESCADA)
                 return 1;
+            else if (mapa[linhas[i]][colunas[j]] == DESCIDA_ESCADA)
+                return 2;
+            else if((mapa[linhas[i]][colunas[j]] == SUBIDA_ESCADA))
+                return 3;
+            
         }
     }
     return 0;
+}
+
+void movimento_escada(int dir, Vector2 * pos_jogador, int esta_na_escada) {
+    float delta = GetFrameTime(); 
+    float dist = (VELOCIDADE_JOGADOR * delta);
+    int pode_ir = 0;
+
+    if (esta_na_escada == 1) { // se ele esta na escada, pode ir para cima e para baixo
+        pode_ir = 1;
+        printf("Escada\n");
+        }
+    else if (esta_na_escada == 2) {// se ele esta na descida da escada, so pode descer
+        if (dir == -1)  {
+            pode_ir = 1;
+        }
+    }
+    else if (esta_na_escada == 3) {// se ele esta na subida da escada, so pode subir
+        if (dir == 1) {
+            pode_ir = 1;
+        }
+    }
+    if (pode_ir)
+        pos_jogador->y += dist * -dir;
 }

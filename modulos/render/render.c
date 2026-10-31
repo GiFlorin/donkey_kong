@@ -17,12 +17,14 @@ void desenhar_mapa(char map[MAPA_LINHAS][MAPA_LINHAS]) { // desenhar o mapa com 
             int x1 = (c + 1) * w / col;
             int y1 = (l + 1) * h / lin;
 
-            if (map[l][c] == 'Z') // chao
+            if (map[l][c] == PLATAFORMAS) // chao
                 DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), PINK);
-            else if (map[l][c] == 'H' || map[l][c] == 'D' || map[l][c] == 'S') // escada
+            else if (map[l][c] == ESCADA || map[l][c] == SUBIDA_ESCADA) // escada
                 DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), SKYBLUE);
-            else if(map[l][c] == 'F')
+            else if(map[l][c] == PORTA) // porta
                 DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), ORANGE);
+            else if (map[l][c] == INIMIGOS) // inimigos
+                DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), GREEN);
         }
     }
 }

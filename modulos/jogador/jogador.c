@@ -27,8 +27,12 @@ int jogador_esta_no_chao(Vector2 pos_jogador, char mapa[MAPA_LINHAS][MAPA_COLUNA
     if (col_esq < 0) col_esq = 0;
     if (col_dir >= MAPA_COLUNAS) col_dir = MAPA_COLUNAS - 1;
 
-    if (mapa[linha_pes][col_esq] == 'Z' || mapa[linha_pes][col_dir] == 'Z') { // so o bloco de baixo for chao
+    if (mapa[linha_pes][col_esq] == PLATAFORMAS || mapa[linha_pes][col_dir] == PLATAFORMAS) { // so o bloco de baixo for chao
         return 1;
+    }
+    else if(mapa[linha_pes][col_esq] == ESCADA || mapa[linha_pes][col_dir] == ESCADA) { // se embaixo dele tiver uma escada
+        if (jogador_esta_na_escada(pos_jogador, mapa) == 2) // se atras dele tem a descida de uma escada
+            return 1;
     }
 
     return 0;
@@ -58,7 +62,6 @@ void jogador_atualizar_pos_y(Jogo * jogo) {
     if (((jogo->jogador).vel_y > 0) && jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
         float tile_h = (float)GetScreenHeight() / MAPA_LINHAS;
         int lin_pes = (int)(((jogo->jogador).pos.y + TAMANHO_PERSONAGEM) / tile_h);
-        //(jogo->jogador).pos.y = lin_pes * tile_h - TAMANHO_PERSONAGEM;   // encosta no chão e mantem ele no chao
         (jogo->jogador).vel_y = 0;
     }
 }

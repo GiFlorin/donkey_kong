@@ -2,6 +2,7 @@
 #include "inimigo.h"
 #include <raylib.h>
 #include "constantes/constantes.h"
+#include <math.h>
 
 int inimigo_esta_no_chao(Vector2 pos, char mapa[MAPA_LINHAS][MAPA_COLUNAS]) { // 1 se estiver no chao e 0 se nao
     float delta_col = (float)GetScreenWidth() / MAPA_COLUNAS;

@@ -1,10 +1,18 @@
+/*lida com o arquivo do mapa, carrega o mapa*/
+
 #include "mapa.h"
 #include <stdio.h>
 #include <string.h>
 #include <raylib.h>
 #include "constantes/constantes.h"
 
-int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com sucesso e 0 com erro
+void carregar_nivel(Jogo * jogo, char caminho[MAX_CAMINHO]) {
+    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, caminho, jogo->mapa);
+    
+    jogo->jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo->mapa);
+}
+
+int ler_arquivo(int lin, int col, char caminho[MAX_CAMINHO], char destino[lin][col]) {  // retorna 1 com sucesso e 0 com erro
     /*fopen → confere se dá para abrir
       → para cada linha:
             fgets → tira \n → confere tamanho → strcpy
@@ -12,7 +20,7 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
     */
 
     // ponteiro para o arquivo do mapa
-    FILE *pArq = fopen("maps/mapa1.txt", "r"); // modo r de 'read'
+    FILE *pArq = fopen(caminho, "r"); // modo r de 'read'
     char linha[128] = {0}; // tamanho do mapa = 30 x 30
 
     if (pArq == NULL) { // se não conseguir abrir o arquivo a variavel fica com o valor NULL
@@ -25,6 +33,7 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
 
         if (!fgets(linha, sizeof(linha), pArq)) { // ERRO: (fgets le a linha do arquivo), se o arquivo acabar antes do esperado
             printf("ERRO: arquivo menor do que o esperado\n");
+            fclose(pArq); // fechar o arquivo
             return 0;
         }
 
@@ -32,6 +41,7 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
 
         if (strlen(linha) != (size_t)lin) { // ERRO: se a linha tiver o tamanho errado
             printf("ERRO: linha com o tamanho errado\n");
+            fclose(pArq); // fechar o arquivo
             return 0;
         }
         

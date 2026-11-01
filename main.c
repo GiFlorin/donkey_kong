@@ -12,12 +12,14 @@ int main(void)
 {
     // DECLARACAO VARIAVEIS
     Jogo jogo = {0};
-    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
+    char caminho[MAX_CAMINHO] = "maps/mapa1.txt";
     
     // inicializar tela
     InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");
     SetTargetFPS(FPS_ALVO);
-    jogo.jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo.mapa);
+
+    // Carregar nivel
+    carregar_nivel(&jogo, caminho);
 
     while (!WindowShouldClose())
     {

@@ -12,7 +12,7 @@
 #define VELOCIDADE_JOGADOR 130
 #define PULO_JOGADOR     150
 #define GRAVIDADE        270
-#define VELOCIDADE_INIMIGO 100
+#define VELOCIDADE_INIMIGO 150
 #define MAX_INIMIGOS     20
 #define MAX_CAMINHO      50
 #define MAX_PLACAR       10

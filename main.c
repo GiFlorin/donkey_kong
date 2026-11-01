@@ -12,7 +12,7 @@ int main(void)
 {
     // DECLARACAO VARIAVEIS
     Jogo jogo = {0};
-    char caminho[MAX_CAMINHO] = "maps/mapa1.txt";
+    char caminho[MAX_CAMINHO] = "mapas/mapa1.txt";
     
     // inicializar tela
     InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");

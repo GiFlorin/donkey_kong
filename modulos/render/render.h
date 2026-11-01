@@ -8,6 +8,8 @@ void desenhar_mapa(char map[MAPA_LINHAS][MAPA_COLUNAS]); // desenhar o mapa com 
 
 void desenhar_jogador(Vector2 pos, int altura, int largura);
 
+void desenhar_inimigos(Inimigo inimigos[MAX_INIMIGOS], int n_inimigos);
+
 void desenhar_jogo(Jogo jogo);
 
 #endif

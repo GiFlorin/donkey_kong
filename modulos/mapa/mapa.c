@@ -5,11 +5,16 @@
 #include <string.h>
 #include <raylib.h>
 #include "constantes/constantes.h"
+#include "tipos/tipos.h"
 
 void carregar_nivel(Jogo * jogo, char caminho[MAX_CAMINHO]) {
-    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, caminho, jogo->mapa);
+    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, caminho, jogo->mapa); // carrega o mapa do arquivo de texto
     
-    jogo->jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo->mapa);
+    jogo->jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo->mapa); // posicao inicial do jogador
+
+    // carregar inimigos
+    jogo->n_inimigos = carregar_inimigos(jogo->mapa, jogo->inimigos);
+
 }
 
 int ler_arquivo(int lin, int col, char caminho[MAX_CAMINHO], char destino[lin][col]) {  // retorna 1 com sucesso e 0 com erro
@@ -59,11 +64,28 @@ Vector2 player_spawn_pos(int lin, int col, char map[lin][col]) { // encontrar a 
     for(int l = 0; l < lin; l++) {
 
         for(int c = 0; c < col; c++) {
-            if (map[l][c] == 'P') {
+            if (map[l][c] == POS_INI_JOGADOR) {
                 pos.x = (GetScreenWidth()/col) * c;
                 pos.y = (GetScreenHeight()/lin) * l;
             }
         }
     }
     return pos;
+}
+
+int carregar_inimigos(char mapa[MAPA_LINHAS][MAPA_COLUNAS], Inimigo inimigos[MAX_INIMIGOS]) { // retorna o n de inimigos
+    int cont = 0;
+
+    for(int l = 0; l < MAPA_LINHAS; l++) {
+        for(int c = 0; c < MAPA_COLUNAS; c++) {
+            if (mapa[l][c] == INIMIGOS) {
+                inimigos[cont].pos.x = (GetScreenWidth()/MAPA_COLUNAS) * c;
+                inimigos[cont].pos.y = (GetScreenHeight()/MAPA_LINHAS) * l;
+                inimigos[cont].vivo = 1;
+                inimigos[cont].dir = 1;
+                cont++;
+            }
+        }
+    }
+    return cont;
 }

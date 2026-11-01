@@ -23,14 +23,19 @@ void desenhar_mapa(char map[MAPA_LINHAS][MAPA_LINHAS]) { // desenhar o mapa com 
                 DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), SKYBLUE);
             else if(map[l][c] == PORTA) // porta
                 DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), ORANGE);
-            else if (map[l][c] == INIMIGOS) // inimigos
-                DrawRectangle(x0, y0, (x1 - x0), (y1 - y0), GREEN);
         }
     }
 }
 
 void desenhar_jogador(Vector2 pos, int altura, int largura) {
     DrawRectangle(pos.x, pos.y, altura, largura, RED);
+}
+
+void desenhar_inimigos(Inimigo inimigos[MAX_INIMIGOS], int n_inimigos) {
+    for (int i = 0; i < n_inimigos; i++) {
+        if (inimigos[i].vivo == 1)
+            DrawRectangle(inimigos[i].pos.x, inimigos[i].pos.y, TAMANHO_INIMIGO, TAMANHO_INIMIGO, YELLOW);
+    }
 }
 
 void desenhar_hud(int fase_num, float tempo) {
@@ -47,6 +52,7 @@ void desenhar_jogo(Jogo jogo) {
     BeginDrawing();
     ClearBackground(DARKGREEN);
     desenhar_mapa(jogo.mapa);
+    desenhar_inimigos(jogo.inimigos, jogo.n_inimigos);
     desenhar_jogador(jogo.jogador.pos, TAMANHO_PERSONAGEM, TAMANHO_PERSONAGEM);
     desenhar_hud(jogo.fase_num, jogo.tempo);
     EndDrawing();

@@ -33,6 +33,7 @@ typedef struct {
 typedef struct {
     char mapa[MAPA_LINHAS][MAPA_COLUNAS];  // matriz do mapa
     Inimigo inimigos[MAX_INIMIGOS];        // vetor com todos os inimigos do mapa
+    int n_inimigos;                        // numero de inimigos no mapa
     float tempo;                           // cronometro do nivel
     Jogador jogador;                       // dados do jogador
     int fase_num;

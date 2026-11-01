@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "jogo.h"
 #include "tipos/tipos.h"
 #include "jogador/jogador.h"
 #include <raylib.h>

@@ -23,14 +23,14 @@ int ler_arquivo(int lin, int col, char destino[lin][col]) {  // retorna 1 com su
     // LENDO O ARQUIVO
     for (int l = 0; l < lin; l++) { // percorre as linhas do arquivo até lin - 1
 
-        if (!fgets(linha, sizeof(linha), pArq)) { // (fgets le a linha do arquivo), se o arquivo acabar antes do esperado, retorna e dá um erro
+        if (!fgets(linha, sizeof(linha), pArq)) { // ERRO: (fgets le a linha do arquivo), se o arquivo acabar antes do esperado
             printf("ERRO: arquivo menor do que o esperado\n");
             return 0;
         }
 
         linha[strcspn(linha, "\r\n")] = '\0'; // remove o \n da string
 
-        if (strlen(linha) != (size_t)lin) { // se a linha tiver o tamanho errado
+        if (strlen(linha) != (size_t)lin) { // ERRO: se a linha tiver o tamanho errado
             printf("ERRO: linha com o tamanho errado\n");
             return 0;
         }

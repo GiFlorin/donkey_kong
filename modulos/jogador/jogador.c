@@ -1,3 +1,5 @@
+/*modulo para movimentação e ações do jogador*/
+
 #include "jogador.h"
 #include "tipos/tipos.h"
 #include "constantes/constantes.h"
@@ -100,7 +102,6 @@ void movimento_escada(int dir, Vector2 * pos_jogador, int esta_na_escada) {
 
     if (esta_na_escada == 1) { // se ele esta na escada, pode ir para cima e para baixo
         pode_ir = 1;
-        printf("Escada\n");
         }
     else if (esta_na_escada == 2) {// se ele esta na descida da escada, so pode descer
         if (dir == -1)  {

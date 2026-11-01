@@ -47,3 +47,31 @@ void andar_inimigo(Inimigo * inimigo) {
         inimigo->pos.x += VELOCIDADE_INIMIGO * delta * inimigo->dir;
     }
 }
+
+int inimigo_colide_jogador(Vector2 pos_jogador, Inimigo inimigos[MAX_INIMIGOS], int n_inimigos) {
+    // Retorna 1 se o jogador esta colidindo com algum inimigo e 0 se nao
+    // 2 pontos contrarios do jogador
+    Vector2 p_pontos[2] = {pos_jogador, 
+        {pos_jogador.x + TAMANHO_PERSONAGEM, pos_jogador.y + TAMANHO_PERSONAGEM}
+    };
+
+    for (int i = 0; i < n_inimigos; i++) {
+        // 2 pontos contrarios do inimigo
+        Vector2 i_pontos[2] = {inimigos[i].pos, 
+            {inimigos[i].pos.x + TAMANHO_INIMIGO, inimigos[i].pos.y + TAMANHO_INIMIGO}
+        };
+
+        if (p_pontos[0].x >= i_pontos[0].x && p_pontos[0].x <= i_pontos[1].x) {
+            if (p_pontos[0].y >= i_pontos[0].y && p_pontos[0].y <= i_pontos[1].y ) {
+                return 1;
+            }
+        }
+        else if (p_pontos[1].x >= i_pontos[0].x && p_pontos[1].x <= i_pontos[1].x) {
+            if (p_pontos[1].y >= i_pontos[0].y && p_pontos[1].y <= i_pontos[1].y ) {
+                return 1;
+            }
+        }
+
+    }
+    return 0;
+}

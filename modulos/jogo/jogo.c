@@ -11,6 +11,10 @@ void atualizar_jogo(Jogo * jogo) {
     jogador_atualizar_pos_y(jogo);
     movimento_inimigos(jogo->mapa, jogo->inimigos, jogo->n_inimigos);
 
+    // checar se o jogador esta colidindo com o inimigo
+    if (inimigo_colide_jogador(jogo->jogador.pos, jogo->inimigos, jogo->n_inimigos))
+        printf("MORREU\n");
+
     // Input mover personagem
     if (IsKeyDown(KEY_A)) 
         mover_jogador(-1, &jogo->jogador);

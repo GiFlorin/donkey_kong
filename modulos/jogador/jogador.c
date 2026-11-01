@@ -7,11 +7,17 @@
 #include <stdio.h>
 #include <math.h>
 
-void mover_jogador(int dir, Jogador * jogador) {
+int mover_jogador(int dir, Jogador * jogador) { // 1 em sucesso, 0 se nao puder mover
     float delta = GetFrameTime(); 
     float dist = (VELOCIDADE_JOGADOR * delta);
+    float nova_pos = (jogador->pos).x + dist * dir;
 
-    (jogador->pos).x += dist * dir;
+    // se estiver na borda do mapa
+    // if (linha_pes < 0 || linha_pes >= MAPA_LINHAS) return 0; 
+    if (nova_pos < 0) return 0;
+    else if (nova_pos + TAMANHO_PERSONAGEM >= GetScreenWidth()) return 0;
+    else (jogador->pos).x = nova_pos;
+    return 1;
     
 }
 

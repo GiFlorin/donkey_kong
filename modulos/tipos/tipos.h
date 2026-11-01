@@ -25,9 +25,16 @@ typedef struct { // struct jogador
 } Jogador;
 
 typedef struct {
-    char mapa[MAPA_LINHAS][MAPA_COLUNAS];
-    float tempo;
-    Jogador jogador;
+    Vector2 pos;         // posicao
+    int dir;             // direcao que ele esta andando atualmente
+    int vivo;            // se ele esta vivo ou nao
+} Inimigo;
+
+typedef struct {
+    char mapa[MAPA_LINHAS][MAPA_COLUNAS];  // matriz do mapa
+    Inimigo inimigos[MAX_INIMIGOS];                    // vetor com todos os inimigos do mapa
+    float tempo;                           // cronometro do nivel
+    Jogador jogador;                       // dados do jogador
     int fase_num;
 
 } Jogo;

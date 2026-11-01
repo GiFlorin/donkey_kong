@@ -12,6 +12,7 @@
 #define PULO_JOGADOR     150
 #define GRAVIDADE        270
 #define VELOCIDADE_INIMIGO 100
+#define MAX_INIMIGOS     20
 #define MAX_PLACAR       10
 #define TAM_NOME         20
 #define TAM_FONTE        30

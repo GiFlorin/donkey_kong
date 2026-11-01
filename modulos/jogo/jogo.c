@@ -2,12 +2,14 @@
 #include "jogo.h"
 #include "tipos/tipos.h"
 #include "jogador/jogador.h"
+#include "inimigo/inimigo.h"
 #include <raylib.h>
 
 void atualizar_jogo(Jogo * jogo) {
     //  atualiza a contagem de tempo
     jogo->tempo += GetFrameTime(); // get frame time = o tempo (em s) desde o ultimo frame
     jogador_atualizar_pos_y(jogo);
+    movimento_inimigos(jogo->mapa, jogo->inimigos, jogo->n_inimigos);
 
     // Input mover personagem
     if (IsKeyDown(KEY_A)) 

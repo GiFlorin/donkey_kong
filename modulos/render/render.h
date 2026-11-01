@@ -12,4 +12,8 @@ void desenhar_inimigos(Inimigo inimigos[MAX_INIMIGOS], int n_inimigos);
 
 void desenhar_jogo(Jogo jogo);
 
+void desenhar_menu();
+
+void desenhar_tela_perdeu();
+
 #endif

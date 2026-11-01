@@ -68,8 +68,8 @@ void jogador_atualizar_pos_y(Jogo * jogo) {
 
     // se está descendo e tocou no chao
     if (((jogo->jogador).vel_y > 0) && jogador_esta_no_chao((jogo->jogador).pos, jogo->mapa)) {
-        float tile_h = (float)GetScreenHeight() / MAPA_LINHAS;
-        int lin_pes = (int)(((jogo->jogador).pos.y + TAMANHO_PERSONAGEM) / tile_h);
+        // float tile_h = (float)GetScreenHeight() / MAPA_LINHAS;
+        // int lin_pes = (int)(((jogo->jogador).pos.y + TAMANHO_PERSONAGEM) / tile_h);
         (jogo->jogador).vel_y = 0;
     }
 }

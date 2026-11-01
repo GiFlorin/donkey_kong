@@ -49,11 +49,22 @@ void desenhar_hud(int fase_num, float tempo) {
 }
 
 void desenhar_jogo(Jogo jogo) {
-    BeginDrawing();
     ClearBackground(DARKGREEN);
     desenhar_mapa(jogo.mapa);
     desenhar_inimigos(jogo.inimigos, jogo.n_inimigos);
     desenhar_jogador(jogo.jogador.pos, TAMANHO_PERSONAGEM, TAMANHO_PERSONAGEM);
     desenhar_hud(jogo.fase_num, jogo.tempo);
-    EndDrawing();
+}
+
+void desenhar_menu() {
+    ClearBackground(ORANGE);
+    DrawText("MENU", GetScreenWidth()/3, GetScreenHeight()/2, 60, WHITE); 
+    DrawText("SPACE PARA COMECAR", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
+}
+
+void desenhar_tela_perdeu() {
+    ClearBackground(RED);
+    DrawText("VOCE PERDEU", GetScreenWidth()/4, GetScreenHeight()/2, 60, WHITE); 
+    DrawText("SPACE para voltar ao menu", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
+    
 }

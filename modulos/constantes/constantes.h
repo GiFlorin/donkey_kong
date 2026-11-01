@@ -15,6 +15,7 @@
 #define VELOCIDADE_INIMIGO 150
 #define MAX_INIMIGOS     20
 #define MAX_CAMINHO      50
+#define MAX_NOME         30
 #define MAX_PLACAR       10
 #define TAM_NOME         20
 #define TAM_FONTE        30

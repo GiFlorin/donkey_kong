@@ -5,6 +5,8 @@
 #include "jogador/jogador.h"
 #include <raylib.h>
 
-void atualizar_jogo(Jogo * jogo);
+void inicializar_jogo(Ambiente * ambiente);
+
+void atualizar_jogo(Ambiente * ambiente);
 
 #endif

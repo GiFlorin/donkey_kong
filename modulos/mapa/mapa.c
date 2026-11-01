@@ -7,8 +7,8 @@
 #include "constantes/constantes.h"
 #include "tipos/tipos.h"
 
-void carregar_nivel(Jogo * jogo, char caminho[MAX_CAMINHO]) {
-    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, caminho, jogo->mapa); // carrega o mapa do arquivo de texto
+void carregar_nivel(Jogo * jogo) {
+    ler_arquivo(MAPA_LINHAS, MAPA_COLUNAS, jogo->caminho_fase, jogo->mapa); // carrega o mapa do arquivo de texto
     
     jogo->jogador.pos = player_spawn_pos(MAPA_LINHAS, MAPA_COLUNAS, jogo->mapa); // posicao inicial do jogador
 

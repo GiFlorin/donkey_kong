@@ -4,7 +4,7 @@
 #include "constantes/constantes.h"
 #include "tipos/tipos.h"
 
-void carregar_nivel(Jogo * jogo, char caminho[MAX_CAMINHO]);
+void carregar_nivel(Jogo * jogo);
 
 int ler_arquivo(int lin, int col, char caminho[MAX_CAMINHO], char destino[lin][col]);
 

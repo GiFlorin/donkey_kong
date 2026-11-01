@@ -8,9 +8,11 @@
 typedef enum {
     TELA_MENU, 
     TELA_JOGANDO, 
+    TELA_NIVEIS,
     TELA_PAUSA,
     TELA_RANKING, 
-    TELA_FIM, 
+    TELA_PERDEU,
+    TELA_GANHOU, 
     TELA_NOME, 
     TELA_SAIR
 } EstadoTela;
@@ -36,8 +38,16 @@ typedef struct {
     int n_inimigos;                        // numero de inimigos no mapa
     float tempo;                           // cronometro do nivel
     Jogador jogador;                       // dados do jogador
+    char caminho_fase[MAX_CAMINHO];        // caminho arquivo mapa fase
     int fase_num;
 
 } Jogo;
+
+typedef struct {
+    Jogo jogo;
+    int estado_tela;
+    char nome[MAX_NOME];
+
+} Ambiente;
 
 #endif

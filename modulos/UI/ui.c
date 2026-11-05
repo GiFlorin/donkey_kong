@@ -20,10 +20,20 @@ void menu(Ambiente * ambiente) {
 void tela_perdeu(Ambiente * ambiente) {
     if (ambiente->estado_tela != TELA_PERDEU) {
         ambiente->estado_tela = TELA_PERDEU;
-        printf("VOCE PERDEU\n");
     }
 
-    if (IsKeyDown(KEY_SPACE)) {
+    if (IsKeyDown(KEY_SPACE)) { // vai para o menu ao apertar espaço
+        menu(ambiente);
+    }
+}
+
+void tela_ganhou(Ambiente * ambiente) {
+    if (ambiente->estado_tela != TELA_GANHOU) { // muda o estado da tela quando entra na funcao
+        ambiente->estado_tela = TELA_GANHOU;
+        printf("VOCE GANHOU\n");
+    }
+
+    if (IsKeyDown(KEY_SPACE)) { // vai para o menu ao apertar espaço
         menu(ambiente);
     }
 }

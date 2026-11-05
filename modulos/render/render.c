@@ -62,9 +62,22 @@ void desenhar_menu() {
     DrawText("SPACE PARA COMECAR", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
 }
 
-void desenhar_tela_perdeu() {
+void desenhar_tela_perdeu(Ambiente * ambiente) {
+    char texto[50] = {0};
+    sprintf(texto, "Tempo de jogo: %.1f", ambiente->jogo.tempo);
     ClearBackground(RED);
     DrawText("VOCE PERDEU", GetScreenWidth()/4, GetScreenHeight()/2, 60, WHITE); 
+    DrawText(texto, GetScreenWidth()/4, GetScreenHeight()/8, TAM_FONTE, WHITE); 
+    DrawText("SPACE para voltar ao menu", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
+    
+}
+
+void desenhar_tela_ganhou(Ambiente * ambiente) {
+    char texto[50] = {0};
+    sprintf(texto, "Tempo de jogo: %.1f", ambiente->jogo.tempo);
+    ClearBackground(GREEN);
+    DrawText("VOCE PERDEU", GetScreenWidth()/4, GetScreenHeight()/2, 60, WHITE); 
+    DrawText(texto, GetScreenWidth()/4, GetScreenHeight()/8, TAM_FONTE, WHITE); 
     DrawText("SPACE para voltar ao menu", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
     
 }

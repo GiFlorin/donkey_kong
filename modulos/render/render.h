@@ -14,6 +14,8 @@ void desenhar_jogo(Jogo jogo);
 
 void desenhar_menu();
 
-void desenhar_tela_perdeu();
+void desenhar_tela_perdeu(Ambiente * ambiente);
+
+void desenhar_tela_ganhou(Ambiente * ambiente);
 
 #endif

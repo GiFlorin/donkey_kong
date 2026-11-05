@@ -11,8 +11,8 @@ void inicializar_jogo(Ambiente * ambiente) {
     if (ambiente->estado_tela != TELA_JOGANDO) {
         ambiente->estado_tela = TELA_JOGANDO;
         printf("Entrando no jogo\n");
-    // Carregar nivel
-    carregar_nivel(&ambiente->jogo);
+        // Carregar nivel
+        carregar_nivel(&ambiente->jogo);
     }
 }
 

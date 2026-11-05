@@ -22,47 +22,48 @@ int main(void)
     InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");
     SetTargetFPS(FPS_ALVO);
 
+    // MAQUINA DE ESTADOS DO JOGO
     while (!WindowShouldClose())
     {
         switch (ambiente.estado_tela) {
-            case TELA_MENU: menu(&ambiente); break;
+            case TELA_MENU:    menu(&ambiente); break;
 
-            case TELA_NIVEIS: printf("TELA LISTA DE NIVEIS\n"); break;
+            case TELA_NIVEIS:  printf("TELA LISTA DE NIVEIS\n"); break;
             
             case TELA_JOGANDO: atualizar_jogo(&ambiente); break;
 
-            case TELA_PAUSA: printf("TELA PAUSE\n"); break;
+            case TELA_PAUSA:   printf("TELA PAUSE\n"); break;
 
-            case TELA_PERDEU: tela_perdeu(&ambiente); break;
+            case TELA_PERDEU:  tela_perdeu(&ambiente); break;
             
-            case TELA_GANHOU: printf("TELA FIM-> GANHOU\n"); break;
+            case TELA_GANHOU:  tela_ganhou(&ambiente); break;
 
-            case TELA_NOME: printf("TELA ESCREVA O SEU NOME\n"); break;
+            case TELA_NOME:    printf("TELA ESCREVA O SEU NOME\n"); break;
 
-            case TELA_SAIR: printf("TELA SAINDO...\n"); break;
+            case TELA_SAIR:    printf("TELA SAINDO...\n"); break;
 
-            default: printf("ERRO: Estado de tela inválido\n"); break;
+            default:           printf("ERRO: Estado de tela inválido\n"); break;
         }
         // DESENHAR
         BeginDrawing();
         switch (ambiente.estado_tela) {
-            case TELA_MENU: desenhar_menu(); break;
+            case TELA_MENU:    desenhar_menu(); break;
 
-            case TELA_NIVEIS: printf("TELA LISTA DE NIVEIS\n"); break;
+            case TELA_NIVEIS:  printf("TELA LISTA DE NIVEIS\n"); break;
             
             case TELA_JOGANDO: desenhar_jogo(ambiente.jogo); break;
 
-            case TELA_PAUSA: printf("TELA PAUSE\n"); break;
+            case TELA_PAUSA:   printf("TELA PAUSE\n"); break;
 
-            case TELA_PERDEU: desenhar_tela_perdeu(); break;
+            case TELA_PERDEU:  desenhar_tela_perdeu(&ambiente); break;
             
-            case TELA_GANHOU: printf("TELA FIM-> GANHOU\n"); break;
+            case TELA_GANHOU:  desenhar_tela_perdeu(&ambiente); break;
 
-            case TELA_NOME: printf("TELA ESCREVA O SEU NOME\n"); break;
+            case TELA_NOME:    printf("TELA ESCREVA O SEU NOME\n"); break;
 
-            case TELA_SAIR: printf("TELA SAINDO...\n"); break;
+            case TELA_SAIR:    printf("TELA SAINDO...\n"); break;
 
-            default: printf("ERRO: Estado de tela inválido\n"); break;
+            default:           printf("ERRO: Estado de tela inválido\n"); break;
         
         }
         EndDrawing();

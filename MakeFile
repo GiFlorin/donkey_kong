@@ -5,18 +5,30 @@ TARGET   = main.exe
 # Ajuste para onde a Raylib está instalada
 RAYLIB   = C:/raylib/raylib/src
 
+# Configurações individuais de cada computador
+-include config.mk
+
+# Se não houver configuração individual, usa o caminho padrão
+RAYLIB_INC ?= $(RAYLIB)
+
 # Todos os .c: o main.c e qualquer .c dentro de modulos/*/
 SRC      = main.c $(wildcard modulos/*/*.c)
 OBJ      = $(SRC:.c=.o)
 DEP      = $(OBJ:.o=.d)
 
 # Cada pasta de módulo vira um -I, então basta #include "mapa.h"
-INCLUDES = -I$(RAYLIB) $(addprefix -I,$(wildcard modulos/*))
+INCLUDES = -I"$(RAYLIB_INC)" $(addprefix -I,$(wildcard modulos/*))
 
 CFLAGS   = -Wall -Wextra -std=c99 -g $(INCLUDES) -MMD -MP
 CFLAGS  += -Imodulos
-LDFLAGS  = -L$(RAYLIB)
-LDLIBS   = -lraylib -lopengl32 -lgdi32 -lwinmm
+# Usa a biblioteca local, se estiver configurada
+ifneq ($(strip $(RAYLIB_LIB)),)
+LDFLAGS =
+LDLIBS = "$(RAYLIB_LIB)" -lopengl32 -lgdi32 -lwinmm
+else
+LDFLAGS = -L$(RAYLIB)
+LDLIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
+endif
 
 # ===== Regras =====
 all: $(TARGET)

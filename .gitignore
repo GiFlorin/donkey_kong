@@ -1,0 +1,7 @@
+# Configurações locais de cada computador
+config.mk
+
+# Arquivos gerados pela compilação
+*.o
+*.d
+main.exe

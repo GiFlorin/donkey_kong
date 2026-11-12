@@ -19,7 +19,7 @@ int main(void)
     strcpy(ambiente.jogo.caminho_fase, "mapas/mapa1.txt");
     
     // inicializar tela
-    InitWindow(ALTURA_JANELA, LARGURA_JANELA, "Donkey Kong");
+    InitWindow(LARGURA_JANELA, ALTURA_JANELA, "Donkey Kong");
     SetTargetFPS(FPS_ALVO);
 
     // MAQUINA DE ESTADOS DO JOGO
@@ -32,7 +32,7 @@ int main(void)
             
             case TELA_JOGANDO: atualizar_jogo(&ambiente); break;
 
-            case TELA_PAUSA:   printf("TELA PAUSE\n"); break;
+            case TELA_PAUSA:   pausa(&ambiente); break;
 
             case TELA_PERDEU:  tela_perdeu(&ambiente); break;
             
@@ -53,11 +53,11 @@ int main(void)
             
             case TELA_JOGANDO: desenhar_jogo(ambiente.jogo); break;
 
-            case TELA_PAUSA:   printf("TELA PAUSE\n"); break;
+            case TELA_PAUSA:   desenhar_pausa(&ambiente); break;
 
             case TELA_PERDEU:  desenhar_tela_perdeu(&ambiente); break;
             
-            case TELA_GANHOU:  desenhar_tela_perdeu(&ambiente); break;
+            case TELA_GANHOU:  desenhar_tela_ganhou(&ambiente); break;
 
             case TELA_NOME:    printf("TELA ESCREVA O SEU NOME\n"); break;
 

@@ -38,3 +38,9 @@ void tela_ganhou(Ambiente * ambiente) {
     }
 }
 
+void pausa(Ambiente *ambiente) {
+    if (IsKeyPressed(KEY_P)) {
+        ambiente->estado_tela = TELA_JOGANDO;
+    }
+}
+

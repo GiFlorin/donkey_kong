@@ -18,4 +18,6 @@ void desenhar_tela_perdeu(Ambiente * ambiente);
 
 void desenhar_tela_ganhou(Ambiente * ambiente);
 
+void desenhar_pausa (Ambiente *ambiente);
+
 #endif

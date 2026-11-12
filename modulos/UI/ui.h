@@ -9,4 +9,6 @@ void tela_perdeu(Ambiente * ambiente);
 
 void tela_ganhou(Ambiente * ambiente);
 
+void pausa(Ambiente *ambiente);
+
 #endif 

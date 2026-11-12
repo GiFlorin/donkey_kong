@@ -17,16 +17,24 @@ void inicializar_jogo(Ambiente * ambiente) {
 }
 
 void atualizar_jogo(Ambiente * ambiente) {
-    Jogo *jogo = &ambiente->jogo;
+     Jogo *jogo = &ambiente->jogo;
+
+    //pausar o jogo ao apertar P
+    if (IsKeyPressed(KEY_P)) {
+    ambiente->estado_tela = TELA_PAUSA;
+    return;
+}
     //  atualiza a contagem de tempo
     jogo->tempo += GetFrameTime(); // get frame time = o tempo (em s) desde o ultimo frame
     jogador_atualizar_pos_y(jogo);
     movimento_inimigos(jogo->mapa, jogo->inimigos, jogo->n_inimigos);
 
+
     // checar se o jogador esta colidindo com o inimigo
     if (inimigo_colide_jogador(jogo->jogador.pos, jogo->inimigos, jogo->n_inimigos)) {
         printf("MORREU\n");
         tela_perdeu(ambiente);
+        return; //jogo para pois ocorreu a colisao
     }
         
 

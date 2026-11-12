@@ -81,3 +81,29 @@ void desenhar_tela_ganhou(Ambiente * ambiente) {
     DrawText("SPACE para voltar ao menu", GetScreenWidth()/4, GetScreenHeight()/4 * 3, TAM_FONTE, WHITE); 
     
 }
+
+void desenhar_pausa (Ambiente *ambiente){
+    //o jogo parado, como fundo
+    desenhar_jogo(ambiente->jogo);
+
+    //tamanho da caixa
+    int largura_caixa = LARGURA_JANELA * 0.6;
+    int altura_caixa  = ALTURA_JANELA * 0.4; 
+    //caixa no centro:
+    int x_caixa = (LARGURA_JANELA - largura_caixa) / 2;
+    int y_caixa = (ALTURA_JANELA - altura_caixa) / 2;
+
+    //fundo escuro na caixa
+    DrawRectangle(x_caixa, y_caixa, largura_caixa, altura_caixa, Fade(PINK, 0.9f));
+
+    char titulo[] = "PAUSADO";
+    char dica[]   = "Aperte P para continuar";
+
+    int x_titulo = x_caixa + (largura_caixa - MeasureText(titulo, TAM_FONTE*2)) / 2;
+    int x_dica   = x_caixa + (largura_caixa - MeasureText(dica, TAM_FONTE)) / 2;
+
+
+    DrawText(titulo, x_titulo, y_caixa + altura_caixa / 4,     TAM_FONTE*2, BLACK);
+    DrawText(dica,   x_dica,   y_caixa + altura_caixa * 2 / 3, TAM_FONTE,   BLACK);
+
+}

@@ -46,8 +46,13 @@ typedef struct {
 typedef struct {
     Jogo jogo;
     int estado_tela;
-    char nome[MAX_NOME];
-
+    Usuario user;
 } Ambiente;
+
+typedef struct {
+    char nome[MAX_NOME];
+    float tempo;
+    int pontos;
+} Usuario;
 
 #endif
